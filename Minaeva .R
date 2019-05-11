@@ -1,0 +1,21 @@
+library(ggplot)
+library(car)
+library(corrplot)
+library(psych)
+read.csv("avocado.csv")
+data <- read.csv ("avocado.csv")
+data$Date <- as.numeric(data$Date)
+str(data)
+hist(data$AveragePrice, col="blue")
+# Simple Scatterplot
+attach(data)
+plot( Date, Total.Volume, main="P", 
+     xlab="Date ", ylab="Total.Volume ", pch=1)
+# Add fit lines
+abline(lm(Date~Total.Volume), col="red") # regression line (y~x) 
+lines(lowess(Date,Total.Volume), col="blue") # lowess line (x,y)
+corr.test(data [, c (2, 3, 4)], method = 'pearson')
+fit <- lm(AveragePrice ~ Date + Total.Volume, data = swiss)
+summary(fit)
+confint(fit)
+qqPlot(fit, labels = row.names(d1), simulate = TRUE, main = 'График')
